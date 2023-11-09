@@ -46,7 +46,7 @@ const Tabla = () => {
       shape: 'rounded',
       showRowsPerPage: true,
       variant: 'outlined',
-      labelRowsPerPage:'Pagina'
+      labelRowsPerpage:'Pagina'
     },
   });
 

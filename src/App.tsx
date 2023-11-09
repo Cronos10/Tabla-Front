@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Tabla from './Components/Tabla';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import CssBaseline from '@mui/material/CssBaseline'; 
 
 function App() {
+  // Control modo dark
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  // tema modo dark
+  const theme = createTheme({
+    palette: {
+      mode: isDarkMode ? 'dark' : 'light',
+    },
+    typography: {
+      fontFamily: isDarkMode ? 'Comic Sans MS' : 'Geneva',
+    },
+  });
+
+  // Cambiar modo 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline /> {/* modo dark */}
+      <IconButton onClick={toggleDarkMode} color="inherit">
+        {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+      </IconButton>
+      <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+        <Grid item xs={12} md={8}>
+          <Paper elevation={2} style={{ padding: '1rem', margin: '1rem' }}>
+            <Tabla />
+          </Paper>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 }
 
